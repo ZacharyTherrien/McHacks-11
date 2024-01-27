@@ -1,22 +1,21 @@
 let map;
 
 async function initMap() {
-  const { Map } = await google.maps.importLibrary("maps");
+    const { Map } = await google.maps.importLibrary("maps");
 
-  map = new Map(document.getElementById("map"), {
-    center: { lat: -34.397, lng: 150.644 },
-    zoom: 8,
-  });
+    map = new Map(document.getElementById("map"), {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 8,
+    });
 
   
-  map.addListener('click', function(event){
-    new google.maps.Marker({
-      position : event.latLng,
-      map: map
-  });
-    
-
-});
-
+    map.addListener('click', event => 
+    {
+        new google.maps.Marker({
+            position : event.latLng,
+            map: map
+        });
+    });
 }
+
 initMap();
