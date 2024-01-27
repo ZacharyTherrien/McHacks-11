@@ -7,6 +7,16 @@ async function initMap() {
     center: { lat: -34.397, lng: 150.644 },
     zoom: 8,
   });
-}
 
+  
+  map.addListener('click', function(event){
+    new google.maps.Marker({
+      position : event.latLng,
+      map: map
+  });
+    
+
+});
+
+}
 initMap();
