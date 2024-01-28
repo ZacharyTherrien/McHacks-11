@@ -41,7 +41,7 @@ function articleSearch()
     list.innerHTML = "";
     let loading = document.createElement("p");
     loading.innerHTML = "Loading articles...";
-    list.appendChild(loading)
+    list.appendChild(loading);
     let query = url + COUNTRY_LONG + API_KEY;
     fetch(query)
         .then(response => response.json())

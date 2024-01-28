@@ -3,7 +3,6 @@ import { COUNTRY_LONG, COUNTRY_SMALL, reset, change_country, url, API_KEY, query
 let map;
 let marker;
 let geocoder;
-let foundC;
 
 document.getElementById("randomizerButton").addEventListener("click", randoArea);
 
@@ -68,7 +67,6 @@ function mapClick(latLng, geocoder = null){
                         {
                             change_country(component.long_name, component.short_name);
                             found = true;
-                            foundC = found;
                             //alert();
                             //Now break through each loop since country name found.
                             break;
@@ -78,14 +76,28 @@ function mapClick(latLng, geocoder = null){
                         break;
                 }
                 document.getElementById("searchResults").innerText = "Search results for: "
-                if(found)
-                {
+                if(found){
                     console.log("Broadcasting from " + COUNTRY_LONG + " (" + COUNTRY_SMALL + ")");
                     change_url(COUNTRY_LONG);
                     document.getElementById("searchResults").innerHTML += COUNTRY_LONG;
                     document.getElementById('findMe').disabled = false;
                     break;
                 }
+                // else{
+                //     let list = document.getElementById("results");
+                //     let fish = document.createElement("img");
+                //     fish.classList.add('articleImage');
+                //     fish.src = "./icon/aquarium.gif";
+                //     list.appendChild(fish);
+                // }
+            }
+            if(!found){
+                let list = document.getElementById("results");
+                list.innerHTML = "";
+                let fish = document.createElement("img");
+                fish.classList.add('articleImage');
+                fish.src = "./icon/aquarium.gif";
+                list.appendChild(fish);
             }
         }
     })
@@ -94,13 +106,10 @@ function mapClick(latLng, geocoder = null){
 initMap();
 
 function randoArea(){
-    foundC = false;
-    // while(!foundC){
-        let newlatLng;
-        let newLat =  ((Math.random() * 180) -90);
-        let newLng = ((Math.random() * 360) -180);
-        console.log(newLat + " " + newLng);
-        newlatLng = {lat: newLat, lng: newLng};
-        mapClick(newlatLng, geocoder)
-    // }
+    let newlatLng;
+    let newLat =  ((Math.random() * 180) -90);
+    let newLng = ((Math.random() * 360) -180);
+    console.log(newLat + " " + newLng);
+    newlatLng = {lat: newLat, lng: newLng};
+    mapClick(newlatLng, geocoder);
 }
