@@ -10,6 +10,10 @@ let articles = [];
 
 function articleSearch()
 {
+    list.innerHTML = "";
+    let loading = document.createElement("p");
+    loading.innerHTML = "Loading articles...";
+    list.appendChild(loading)
     let query = url + COUNTRY_LONG + API_KEY;
     fetch(query)
         .then(response => response.json())
@@ -36,6 +40,9 @@ function articleSearch()
                     let date = document.createElement("div");
                     date.classList.add("dates");
                     let parse = articles[i]['publishedAt'].split("T");
+                    let time = parse[1];
+
+                    console.log(parse[1])
                     date.innerHTML = "Day: " + parse[0] + " Time: " + parse[1].substring(0, parse[1].length - 1);
                     //
                     let section = document.createElement("li");
