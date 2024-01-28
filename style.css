@@ -145,7 +145,13 @@ html, body
 
 .descriptions
 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
     margin-top: 20px;
+}
+
+.dates
+{
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 
