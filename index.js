@@ -36,7 +36,26 @@ async function initMap()
             }, (results, status) =>
             {
                 if (status == google.maps.GeocoderStatus.OK || results[0])
-                    alert(results[0].formatted_address);
+                {
+                    let country_long;
+                    let country_small;
+                    let address = results[0].address_components
+                    for (let i = 0; i < address.length; i++)
+                    {
+                        let component = address[i];
+                        for (let j = 0; j < component.types.length; j++)
+                        {
+                            let type = component.types[j];
+                            if (type == "country")
+                            {
+                                console.log(component);
+                                country_long = component.long_name;
+                                country_small = component.short_name;
+                            }
+                        }
+                    }
+                    alert("Broadcasting from " + country_long + " (" + country_small + ")")
+                }
             })
     })
 }
