@@ -26,6 +26,11 @@ body
     font-style: normal; */
 }
 
+@font-face { 
+    font-family: 'Anton-Regular';
+    src: url('./icon/Anton-Regular.ttf') format('truetype'),
+}
+
 p, h3
 {
     font-family: 'NewsflashBB', sans-serif;
@@ -33,7 +38,7 @@ p, h3
 
 h2
 {
-    font-family: Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Anton-Regular', sans-serif;
 }
 
 
@@ -67,9 +72,10 @@ html, body
 
 .articles
 {
-    text-decoration: none;
-    font-weight: 900;
-    color: black;
+    text-decoration: underline;
+    font-weight: bold;
+    font-family: 'Anton-Regular', sans-serif;
+    color: rgb(16, 6, 200);
     font-size: 24px;
     padding-bottom: 20px;
 }
@@ -94,7 +100,7 @@ html, body
     padding: 3px;
   }
 
-  .left {
+.left {
     transform: rotate(135deg);
     -webkit-transform: rotate(135deg);
   }
@@ -207,11 +213,11 @@ ul
     transform: scaleX(-1);
 }
 
-.button arrow:active
+.button .arrow:active
 {
     cursor: none;
     top:10px;
-    background-color:#F78900;
+    background-color:#ef7e7e;
     
     -webkit-box-shadow:inset 0 1px 0 #d69999, inset 0 -3px 0 #b52e24;
     -moz-box-shadow:inset 0 1px 0 #d69999, inset 0 -3px 0 #b52e24;
