@@ -1,4 +1,4 @@
-import { COUNTRY_LONG, COUNTRY_SMALL, change_country, reset } from "./static.js"
+import { COUNTRY_LONG, COUNTRY_SMALL, change_country, url, API_KEY, query, change_url } from "./static.js"
 
 let map;
 let marker;
@@ -59,8 +59,8 @@ async function initMap()
                     }
                     else
                     {
-                        console.log("Broadcasting from " + COUNTRY_LONG + " (" + COUNTRY_SMALL + ")")
-                        document.getElementById("searchResults").innerHTML += COUNTRY_LONG;
+                        console.log("Broadcasting from " + COUNTRY_LONG + " (" + COUNTRY_SMALL + ")");
+                        change_url(COUNTRY_LONG);
                     }
                 }
             })
