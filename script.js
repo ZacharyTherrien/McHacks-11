@@ -22,11 +22,32 @@ function articleSearch()
             {
                 if (i > 0 && articles[i]['title'] != articles[i - 1]['title'])
                 {
-                    let article = document.createElement("li");
+                    let article = document.createElement("a");
+                    article.classList.add("articles");
                     article.innerHTML = articles[i]['title'];
-                    list.appendChild(article);
+                    article.href = articles[i]['url'];
+                    console.log(articles[i]['url']);
+                    let source = document.createElement("span");
+                    source.innerHTML = articles[i]['source'];
+                    let description = document.createElement("div");
+                    description.classList.add("descriptions");
+                    description.innerHTML = articles[i]['description'];
+                    //Remove the time from the date
+                    let date = document.createElement("div");
+                    date.classList.add("dates");
+                    let parse = articles[i]['publishedAt'].split("T");
+                    date.innerHTML = "Day: " + parse[0] + " Time: " + parse[1].substring(0, parse[1].length - 1);
+                    //
+                    let section = document.createElement("li");
+                    section.classList.add("sections");
+                    section.appendChild(date);
+                    section.appendChild(article);
+                    section.appendChild(description);
+                    list.appendChild(section);
                 }
             }
+            let foo = document.getElementById("searchResults");
+            foo.href = "google.com";
         })
         .catch(() =>
         {
