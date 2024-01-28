@@ -6,6 +6,7 @@ var allArticles = [];
 // export const url = "https://gnews.io/api/v4/search?q=";
 // export const API_KEY = "&apikey=87752405435ed2dd3fef1c0267ae5da2";
 
+
 let list = document.getElementById("results");
 document.getElementById("findMe").addEventListener("click", articleSearch);
 
@@ -58,6 +59,7 @@ function articleSearch()
                     article.classList.add("articles");
                     article.innerHTML = articles[i]['title'];
                     article.href = articles[i]['url'];
+                    article.target = "_blank";
                     //console.log(articles[i]['url']);
                     let source = document.createElement("span");
                     source.innerHTML = articles[i]['source'];
