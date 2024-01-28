@@ -2,85 +2,105 @@ import { COUNTRY_LONG, COUNTRY_SMALL, reset, change_country, url, API_KEY, query
 
 let map;
 let marker;
+let geocoder;
+let foundC;
+
+document.getElementById("randomizerButton").addEventListener("click", randoArea);
 
 async function initMap()
 {
     const { Map } = await google.maps.importLibrary("maps");
 
-    let geocoder = new google.maps.Geocoder();
+    geocoder = new google.maps.Geocoder();
     map = new Map(document.getElementById("map"), {
         center: { lat: 45.3032, lng: -73.3315 },
         zoom: 8,
         fullscreenControl: true
     });
 
-    map.addListener('click', event =>
-    {
-        if (marker)
-            marker.setPosition(event.latLng);
+    map.addListener('click', event => {
+        mapClick(event.latLng, geocoder);
+    })
+}
 
-        else
+function mapClick(latLng, geocoder = null){
+    if (marker){
+        marker.setPosition(latLng);
+    }
+    else{
+        reset();
+        marker = new google.maps.Marker(
         {
-            reset();
-            marker = new google.maps.Marker(
-            {
-                position: event.latLng,
-                map: map,
-                icon: {
-                    url : './icon/news_icon.png',
-                    scaledSize : new google.maps.Size(50, 75)
-                }
-            })
-          }
+            position: latLng,
+            map: map,
+            icon: {
+                url : './icon/news_icon.png',
+                scaledSize : new google.maps.Size(50, 75)
+            }
+        })
+    }
 
-            geocoder.geocode(
+    geocoder.geocode(
+    {
+        'latLng' : latLng
+    }, (results, status) =>
+    {
+        if (status == google.maps.GeocoderStatus.OK || results[0])
+        {
+            //By default, set it to invalid the first time, and only once.
+            //console.log("Invalid country clicked. ");
+            document.getElementById('findMe').disabled = true;
+            let found = false;
+            //Loop through each result from the onClick on the map.
+            for(let k = 0; k < results.length; k++)
             {
-                'latLng' : event.latLng
-            }, (results, status) =>
-            {
-                if (status == google.maps.GeocoderStatus.OK || results[0])
+                let address = results[k].address_components;
+                //console.log(address);
+                //Each result provides up to several different types of addresses for a location.
+                for (let i = 0; i < address.length; i++)
                 {
-                    //By default, set it to invalid the first time, and only once.
-                    //console.log("Invalid country clicked. ");
-                    document.getElementById('findMe').disabled = true;
-                    let found = false;
-                    //Loop through each result from the onClick on the map.
-                    for(let k = 0; k < results.length; k++)
+                    let component = address[i];
+                    //Loop through each component of each different address until country name.
+                    for (let j = 0; j < component.types.length; j++)
                     {
-                        let address = results[k].address_components;
-                        //console.log(address);
-                        //Each result provides up to several different types of addresses for a location.
-                        for (let i = 0; i < address.length; i++)
+                        let type = component.types[j];
+                        if (type == "country")
                         {
-                            let component = address[i];
-                            //Loop through each component of each different address until country name.
-                            for (let j = 0; j < component.types.length; j++)
-                            {
-                                let type = component.types[j];
-                                if (type == "country")
-                                {
-                                    change_country(component.long_name, component.short_name);
-                                    found = true;
-                                    //Now break through each loop since country name found.
-                                    break;
-                                }
-                            }
-                            if(found)
-                                break;
-                        }
-                        document.getElementById("searchResults").innerText = "Search results for: "
-                        if(found)
-                        {
-                            console.log("Broadcasting from " + COUNTRY_LONG + " (" + COUNTRY_SMALL + ")");
-                            change_url(COUNTRY_LONG);
-                            document.getElementById("searchResults").innerHTML += COUNTRY_LONG;
-                            document.getElementById('findMe').disabled = false;
+                            change_country(component.long_name, component.short_name);
+                            found = true;
+                            foundC = found;
+                            //alert();
+                            //Now break through each loop since country name found.
                             break;
                         }
                     }
+                    if(found)
+                        break;
                 }
-            })
+                document.getElementById("searchResults").innerText = "Search results for: "
+                if(found)
+                {
+                    console.log("Broadcasting from " + COUNTRY_LONG + " (" + COUNTRY_SMALL + ")");
+                    change_url(COUNTRY_LONG);
+                    document.getElementById("searchResults").innerHTML += COUNTRY_LONG;
+                    document.getElementById('findMe').disabled = false;
+                    break;
+                }
+            }
+        }
     })
 }
 
 initMap();
+
+function randoArea(){
+    foundC = false;
+    // while(!foundC){
+        let newlatLng;
+        let newLat =  ((Math.random() * 180) -90);
+        let newLng = ((Math.random() * 360) -180);
+        console.log(newLat + " " + newLng);
+        newlatLng = {lat: newLat, lng: newLng};
+        mapClick(newlatLng, geocoder)
+    // }
+}
