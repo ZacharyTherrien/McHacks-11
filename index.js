@@ -1,4 +1,4 @@
-import { COUNTRY_LONG, COUNTRY_SMALL, change_country } from "./static.js"
+import { COUNTRY_LONG, COUNTRY_SMALL, change_country, url, API_KEY, query, change_url } from "./static.js"
 
 let map;
 let marker;
@@ -52,8 +52,10 @@ async function initMap()
                     }
                     if (COUNTRY_LONG == undefined)
                         console.log("Oops! Please click on a valid country. ");
-                    else
-                        console.log("Broadcasting from " + COUNTRY_LONG + " (" + COUNTRY_SMALL + ")")
+                    else{
+                        console.log("Broadcasting from " + COUNTRY_LONG + " (" + COUNTRY_SMALL + ")");
+                        change_url(COUNTRY_LONG);
+                    }
                 }
             })
     })

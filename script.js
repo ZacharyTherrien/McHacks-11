@@ -1,9 +1,9 @@
-import { COUNTRY_LONG, COUNTRY_SMALL } from "./static.js"
+import { COUNTRY_LONG, COUNTRY_SMALL, change_country, url, API_KEY, query } from "./static.js"
 
-const url = "https://gnews.io/api/v4/search?q=";
-const API_KEY = "&apikey=87752405435ed2dd3fef1c0267ae5da2";
+// export const url = "https://gnews.io/api/v4/search?q=";
+// export const API_KEY = "&apikey=87752405435ed2dd3fef1c0267ae5da2";
 
-let query = url + COUNTRY_LONG + API_KEY;
+// export let query = url + "Canada" + API_KEY;
 
 let list = document.getElementById("results");
 document.getElementById("findMe").addEventListener("click", articleSearch);
