@@ -16,9 +16,8 @@ function articleSearch()
         .then(response => response.json())
         .then(data =>
         {
+            list.innerHTML = "";
             articles = data.articles;
-            //console.log(articles);
-            //console.log(articles);
             //Populate the list
             for (let i = 0; i < articles.length; i++)
             {
