@@ -40,7 +40,7 @@ async function initMap()
                 {
                     let country_long;
                     let country_small;
-                    let address = results[0].address_components
+                    let address = results[0].address_components;
                     for (let i = 0; i < address.length; i++)
                     {
                         let component = address[i];
@@ -49,13 +49,15 @@ async function initMap()
                             let type = component.types[j];
                             if (type == "country")
                             {
-                                console.log(component);
                                 country_long = component.long_name;
                                 country_small = component.short_name;
                             }
                         }
                     }
-                    alert("Broadcasting from " + country_long + " (" + country_small + ")")
+                    if (country_long == undefined)
+                        console.log("ඞඞඞඞඞඞ");
+                    else
+                        console.log("Broadcasting from " + country_long + " (" + country_small + ")")
                 }
             })
     })
