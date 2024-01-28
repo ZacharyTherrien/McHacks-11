@@ -23,6 +23,8 @@ async function initMap()
 }
 
 function mapClick(latLng, geocoder = null){
+    let list = document.getElementById("results");
+    list.innerHTML = "";
     if (marker){
         marker.setPosition(latLng);
     }
@@ -92,8 +94,6 @@ function mapClick(latLng, geocoder = null){
                 // }
             }
             if(!found){
-                let list = document.getElementById("results");
-                list.innerHTML = "";
                 let fish = document.createElement("img");
                 fish.classList.add('articleImage');
                 fish.src = "./icon/aquarium.gif";
