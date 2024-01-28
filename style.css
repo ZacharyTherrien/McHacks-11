@@ -15,14 +15,28 @@ body
 .title
 {
     text-align: center;
-    font-size: 24px;
+    font-size: 50px;
     margin: 15px 0;
 }
 
-p, h2, h3
-{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+@font-face { 
+    font-family: 'NewsflashBB';
+    src: url('./icon/NewsflashBB.ttf') format('truetype'),
+    /* font-weight: normal;
+    font-style: normal; */
 }
+
+p, h3
+{
+    font-family: 'NewsflashBB', sans-serif;
+}
+
+h2
+{
+    font-family: Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
 
 html, body
 {
@@ -40,9 +54,9 @@ html, body
 
 #searchResults
 {
-    color: rgba(255, 255, 34, 0.833);
+    color: black;
     text-align: center;
-    filter: drop-shadow(.05em .05em orange);
+    filter: drop-shadow(.05em .05em rgb(92, 91, 88));
 }
 
 .allButtonsForNews
