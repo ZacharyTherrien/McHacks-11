@@ -41,7 +41,7 @@ async function initMap()
                 if (status == google.maps.GeocoderStatus.OK || results[0])
                 {
                     //By default, set it to invalid the first time, and only once.
-                    console.log("Invalid country clicked. ");
+                    //console.log("Invalid country clicked. ");
                     document.getElementById('findMe').disabled = true;
                     let found = false;
                     //Loop through each result from the onClick on the map.
