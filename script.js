@@ -39,5 +39,13 @@ function articleSearch(){
 }
 
 function validateArticles(){
-
+    //let delete;
+    let del = [];
+    for (let i = 0; i < articles.length; i++){
+        for ( let j = i; j < articles.length; j++){
+            if (articles[i] = articles[j]){
+                del.push(i)
+            }
+        }
+    }
 }
