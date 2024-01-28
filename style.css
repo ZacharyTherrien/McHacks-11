@@ -56,8 +56,20 @@ html, body
     text-decoration: none;
     font-weight: 900;
     color: black;
-    font-size: 36px;
+    font-size: 24px;
     padding-bottom: 20px;
+}
+
+.articleImage
+{
+    height: 100%;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.descriptions
+{
+    margin-top: 20px;
 }
 
 

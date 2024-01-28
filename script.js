@@ -76,10 +76,10 @@ function articleSearch()
                     let section = document.createElement("li");
                     section.classList.add("sections");
                     section.appendChild(date);
-                    let time = document.createElement("div");
-                    date.classList.add("times");
-                    time.innerHTML = parse[1].substring(0, parse[1].length - 4);
-                    section.appendChild(time);
+                    //let time = document.createElement("div");
+                    //time.classList.add("times");
+                    //time.innerHTML = parse[1].substring(0, parse[1].length - 4);
+                    //section.appendChild(time);
                     section.appendChild(article);
                     section.appendChild(breakLine);
                     section.appendChild(description);
