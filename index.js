@@ -11,6 +11,8 @@ async function initMap() {
   
     map.addListener('click', event => 
     {
+        let latitude = event.fi.y;
+        let longitude = event.fi.x;
         new google.maps.Marker({
             position : event.latLng,
             map: map
