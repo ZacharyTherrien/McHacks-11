@@ -61,6 +61,7 @@ async function initMap()
                     {
                         console.log("Broadcasting from " + COUNTRY_LONG + " (" + COUNTRY_SMALL + ")");
                         change_url(COUNTRY_LONG);
+                        document.getElementById("searchResults").innerHTML += COUNTRY_LONG;
                     }
                 }
             })
