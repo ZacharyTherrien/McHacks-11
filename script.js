@@ -10,28 +10,28 @@ document.getElementById("findMe").addEventListener("click", articleSearch);
 
 let articles = [];
 
-function articleSearch(){
+function articleSearch()
+{
     fetch(query)
-        .then(function (response) {
-            // alert("oh no");
-            // console.log(response);
-            return response.json();
-        })
-        .then(function (data) {
+        .then(response => response.json())
+        .then(data =>
+        {
             articles = data.articles;
             //console.log(articles);
             //console.log(articles);
             //Populate the list
-            for (let i = 0; i < articles.length; i++) {
-                //console.log(articles[i]);
-                if (i > 0 && articles[i]['title'] != articles[i-1]['title']){
+            for (let i = 0; i < articles.length; i++)
+            {
+                if (i > 0 && articles[i]['title'] != articles[i - 1]['title'])
+                {
                     let article = document.createElement("li");
                     article.innerHTML = articles[i]['title'];
                     list.appendChild(article);
                 }
             }
         })
-        .catch(function(){
+        .catch(() =>
+        {
             console.error("oooppss");
             alert();
         });
