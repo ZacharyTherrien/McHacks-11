@@ -1,15 +1,42 @@
 import { COUNTRY_LONG, COUNTRY_SMALL, change_country, url, API_KEY, query } from "./static.js"
 
+var counter = 0;
+var allArticles = [];
+
 // export const url = "https://gnews.io/api/v4/search?q=";
 // export const API_KEY = "&apikey=87752405435ed2dd3fef1c0267ae5da2";
 
 let list = document.getElementById("results");
 document.getElementById("findMe").addEventListener("click", articleSearch);
 
+
+function goToNextArticle()
+{
+    counter++;
+    if (counter == allArticles.length)
+        counter = 0;
+    list.innerHTML = "";
+    console.log(counter);
+    list.appendChild(allArticles[counter]);
+}
+document.getElementById("nextButtonButton").onclick = goToNextArticle;
+
+function goToPreviousArticle()
+{
+    if (counter == 0)
+        counter = allArticles.length;
+    counter--;
+    list.innerHTML = "";
+    console.log(counter);
+    list.appendChild(allArticles[counter]);
+}
+document.getElementById("previousButtonButton").onclick = goToPreviousArticle;
+
 let articles = [];
 
 function articleSearch()
 {
+    allArticles = [];
     list.innerHTML = "";
     let loading = document.createElement("p");
     loading.innerHTML = "Loading articles...";
@@ -30,7 +57,7 @@ function articleSearch()
                     article.classList.add("articles");
                     article.innerHTML = articles[i]['title'];
                     article.href = articles[i]['url'];
-                    console.log(articles[i]['url']);
+                    //console.log(articles[i]['url']);
                     let source = document.createElement("span");
                     source.innerHTML = articles[i]['source'];
                     let description = document.createElement("div");
@@ -42,7 +69,7 @@ function articleSearch()
                     let parse = articles[i]['publishedAt'].split("T");
                     let time = parse[1];
 
-                    console.log(parse[1])
+                    //console.log(parse[1])
                     date.innerHTML = "Day: " + parse[0] + " Time: " + parse[1].substring(0, parse[1].length - 1);
                     //
                     let section = document.createElement("li");
@@ -50,9 +77,10 @@ function articleSearch()
                     section.appendChild(date);
                     section.appendChild(article);
                     section.appendChild(description);
-                    list.appendChild(section);
+                    allArticles.push(section);
                 }
             }
+            list.appendChild(allArticles[0]);
             let foo = document.getElementById("searchResults");
             foo.href = "google.com";
         })
