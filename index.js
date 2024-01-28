@@ -50,6 +50,7 @@ async function initMap()
                             if (type == "country")
                             {
                                 country_long = component.long_name;
+                                country = country_long;
                                 country_small = component.short_name;
                             }
                         }
