@@ -22,14 +22,14 @@ function articleSearch(){
             articles = data.articles;
             //console.log(articles);
             //console.log(articles);
-            
             //Populate the list
             for (let i = 0; i < articles.length; i++) {
                 //console.log(articles[i]);
-                let article = document.createElement("li");
-                article.innerHTML = articles[i]['title'];
-                list.appendChild(article);
-                validateArticles();
+                if (i > 0 && articles[i]['title'] != articles[i-1]['title']){
+                    let article = document.createElement("li");
+                    article.innerHTML = articles[i]['title'];
+                    list.appendChild(article);
+                }
             }
         })
         .catch(function(){
@@ -38,14 +38,19 @@ function articleSearch(){
         });
 }
 
-function validateArticles(){
-    //let delete;
-    let del = [];
-    for (let i = 0; i < articles.length; i++){
-        for ( let j = i; j < articles.length; j++){
-            if (articles[i] = articles[j]){
-                del.push(i)
-            }
-        }
-    }
-}
+// function validateArticles(){
+//     //let delete;
+//     let del = [];
+//     for (let i = 0; i < articles.length; i++){
+//         for ( let j = i; j < articles.length; j++){
+//             if (articles[i]['title'] == articles[j]['title']){
+//                 del.push(articles[i])
+//                 break
+//             }
+//         }
+//     }
+
+//     for (let k = 0; k < del.length; k++){
+//         articles.splice(del[k], 1)
+//     }
+// }
