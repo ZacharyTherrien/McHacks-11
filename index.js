@@ -1,3 +1,5 @@
+import { COUNTRY_LONG, COUNTRY_SMALL, change_country } from "./static.js"
+
 let map;
 let marker;
 
@@ -12,9 +14,8 @@ async function initMap()
     fullscreenControl: true
     });
 
-    map.addListener('click', function(event) 
+    map.addListener('click', event =>
     {
-
         if (marker)
             marker.setPosition(event.latLng);
 
@@ -38,8 +39,6 @@ async function initMap()
             {
                 if (status == google.maps.GeocoderStatus.OK || results[0])
                 {
-                    let country_long;
-                    let country_small;
                     let address = results[0].address_components;
                     for (let i = 0; i < address.length; i++)
                     {
@@ -48,16 +47,13 @@ async function initMap()
                         {
                             let type = component.types[j];
                             if (type == "country")
-                            {
-                                country_long = component.long_name;
-                                country_small = component.short_name;
-                            }
+                                change_country(component.long_name, component.short_name)
                         }
                     }
-                    if (country_long == undefined)
+                    if (COUNTRY_LONG == undefined)
                         console.log("Oops! Please click on a valid country. ");
                     else
-                        console.log("Broadcasting from " + country_long + " (" + country_small + ")")
+                        console.log("Broadcasting from " + COUNTRY_LONG + " (" + COUNTRY_SMALL + ")")
                 }
             })
     })
