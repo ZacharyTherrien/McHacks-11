@@ -12,9 +12,8 @@ async function initMap()
     fullscreenControl: true
     });
 
-    map.addListener('click', function(event) 
+    map.addListener('click', event =>
     {
-
         if (marker)
             marker.setPosition(event.latLng);
 
