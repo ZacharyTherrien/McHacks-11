@@ -6,29 +6,31 @@ async function initMap() {
 
     map = new Map(document.getElementById("map"), {
     center: { lat: 45.3032, lng: -73.3315 },
-    zoom: 8,
+    zoom: 8
   });
 
-  let infoWindow = new google.maps.InfoWindow({
-    content: '<h1>City<h1/>'
-  });  
+let infoWindow = new google.maps.InfoWindow({
+  content: '<h1>City<h1/>'
+});
 
-  map.addListener('click', function(event) 
-    {
-      if (marker){
+map.addListener('click', function(event) 
+{
+    let latitude = event.fi.y;
+    let longitude = event.fi.x;
+    if (marker)
         marker.setPosition(event.latLng);
-
-      } else { 
+    else
+    {
         marker = new google.maps.Marker({
         position: event.latLng,
         map: map,
         icon: {
-          url : './icon/news_icon.png',
-          scaledSize : new google.maps.Size(50, 50)
+            url : './icon/news_icon.png',
+            scaledSize : new google.maps.Size(50, 50)
         }
-      }) 
+    })
     }
-  });
+});
 
 }
 
