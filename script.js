@@ -1,9 +1,10 @@
-import { COUNTRY_LONG, COUNTRY_SMALL } from "./static.js"
+//import { COUNTRY_LONG, COUNTRY_SMALL } from "./static.js"
 
+let country = "";
 const url = "https://gnews.io/api/v4/search?q=";
 const API_KEY = "&apikey=87752405435ed2dd3fef1c0267ae5da2";
 
-let query = url + COUNTRY_LONG + API_KEY;
+let query = url + country + API_KEY;
 
 let list = document.getElementById("results");
 document.getElementById("findMe").addEventListener("click", articleSearch);

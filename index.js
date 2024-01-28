@@ -1,7 +1,10 @@
-import { COUNTRY_LONG, COUNTRY_SMALL, change_country } from "./static.js"
+//import { COUNTRY_LONG, COUNTRY_SMALL, change_country } from "./static.js"
+import { country } from "./script.js"
 
 let map;
 let marker;
+let country_long;
+let country_small;
 
 async function initMap()
 {
@@ -47,13 +50,18 @@ async function initMap()
                         {
                             let type = component.types[j];
                             if (type == "country")
-                                change_country(component.long_name, component.short_name)
+                            {
+                                country_long = component.long_name;
+                                country_small = component.small_name;
+                                country = country_long;
+                            //change_country(component.long_name, component.short_name)
+                            }
                         }
                     }
-                    if (COUNTRY_LONG == undefined)
+                    if (country_long == undefined)
                         console.log("Oops! Please click on a valid country. ");
                     else
-                        console.log("Broadcasting from " + COUNTRY_LONG + " (" + COUNTRY_SMALL + ")")
+                        console.log("Broadcasting from " + country_long + " (" + country_small + ")")
                 }
             })
     })
