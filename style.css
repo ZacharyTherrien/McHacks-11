@@ -31,3 +31,10 @@ html, body
 {
     text-align: center;
 }
+
+ul
+{
+    list-style-type: none;
+    text-align: center;
+    padding: 0px 15px;
+}
