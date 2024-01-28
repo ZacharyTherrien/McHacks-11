@@ -9,6 +9,7 @@ async function initMap()
     map = new Map(document.getElementById("map"), {
     center: { lat: 45.3032, lng: -73.3315 },
     zoom: 8,
+    fullscreenControl: true
     });
 
     map.addListener('click', function(event) 
