@@ -1,4 +1,4 @@
-import { COUNTRY_LONG, COUNTRY_SMALL, change_country, url, API_KEY, query, change_url } from "./static.js"
+import { COUNTRY_LONG, COUNTRY_SMALL, reset, change_country, url, API_KEY, query, change_url } from "./static.js"
 
 let map;
 let marker;
