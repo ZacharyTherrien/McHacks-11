@@ -3,11 +3,13 @@
   <head>
     <title>Simple Map</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script src="./script.js"></script>
+    <script type="module" src="./script.js"></script>
     <link rel="stylesheet" type="text/css" href="./style.css" />
     <script type="module" src="./index.js"></script>
   </head>
   <body>
+
+
     <div id="map"></div>
 
     <!-- prettier-ignore -->
@@ -39,5 +41,11 @@
             () => d[l](f,...n))
         })
         ({key: "AIzaSyBiC0TPhsPhaZclU5mDHIYkhblXzEWEZ10", v: "weekly"});</script>
+        <div>
+          <h2>Search results</h2>
+          <form></form>
+          <button id="findMe">Click me!</button>
+          <ul id="results"></ul>
+        </div>
   </body>
 </html>
