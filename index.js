@@ -55,7 +55,7 @@ async function initMap()
                         }
                     }
                     if (country_long == undefined)
-                        console.log("ඞඞඞඞඞඞ");
+                        console.log("Oops! Please click on a valid country. ");
                     else
                         console.log("Broadcasting from " + country_long + " (" + country_small + ")")
                 }
