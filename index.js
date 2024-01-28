@@ -28,7 +28,7 @@ async function initMap()
                 map: map,
                 icon: {
                     url : './icon/news_icon.png',
-                    scaledSize : new google.maps.Size(50, 50)
+                    scaledSize : new google.maps.Size(50, 75)
                 }
             })
           }
