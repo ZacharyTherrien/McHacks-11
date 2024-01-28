@@ -6,3 +6,9 @@ export function change_country(long, short)
     COUNTRY_LONG = long;
     COUNTRY_SMALL = short;
 }
+
+export function reset()
+{
+    COUNTRY_LONG = "";
+    COUNTRY_SMALL = "";
+}

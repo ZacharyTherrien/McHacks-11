@@ -10,6 +10,7 @@
   <body>
 
 
+    <h3 class="title">HELLO WORLD</h3>
     <div id="map"></div>
 
     <!-- prettier-ignore -->
@@ -40,9 +41,10 @@
         d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f,...n) => r.add(f) && u().then(
             () => d[l](f,...n))
         })
-        ({key: "AIzaSyBiC0TPhsPhaZclU5mDHIYkhblXzEWEZ10", v: "weekly"});</script>
-        <div>
-          <h2>Search results</h2>
+        ({key: "AIzaSyBiC0TPhsPhaZclU5mDHIYkhblXzEWEZ10", v: "weekly"});
+    </script>
+        <div class="resultsPage">
+          <h2 id="searchResults">Search results for: </h2>
           <form></form>
           <button id="findMe">Click me!</button>
           <ul id="results"></ul>

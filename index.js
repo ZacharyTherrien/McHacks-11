@@ -1,4 +1,4 @@
-import { COUNTRY_LONG, COUNTRY_SMALL, change_country } from "./static.js"
+import { COUNTRY_LONG, COUNTRY_SMALL, change_country, reset } from "./static.js"
 
 let map;
 let marker;
@@ -9,9 +9,9 @@ async function initMap()
 
     let geocoder = new google.maps.Geocoder();
     map = new Map(document.getElementById("map"), {
-    center: { lat: 45.3032, lng: -73.3315 },
-    zoom: 8,
-    fullscreenControl: true
+        center: { lat: 45.3032, lng: -73.3315 },
+        zoom: 8,
+        fullscreenControl: true
     });
 
     map.addListener('click', event =>
@@ -20,7 +20,8 @@ async function initMap()
             marker.setPosition(event.latLng);
 
         else
-        { 
+        {
+            reset();
             marker = new google.maps.Marker(
             {
                 position: event.latLng,
@@ -40,6 +41,7 @@ async function initMap()
                 if (status == google.maps.GeocoderStatus.OK || results[0])
                 {
                     let address = results[0].address_components;
+                    //console.log(address);
                     for (let i = 0; i < address.length; i++)
                     {
                         let component = address[i];
@@ -50,10 +52,16 @@ async function initMap()
                                 change_country(component.long_name, component.short_name)
                         }
                     }
-                    if (COUNTRY_LONG == undefined)
+                    document.getElementById("searchResults").innerText = "Search results for: "
+                    if (COUNTRY_LONG == "")
+                    {
                         console.log("Oops! Please click on a valid country. ");
+                    }
                     else
+                    {
                         console.log("Broadcasting from " + COUNTRY_LONG + " (" + COUNTRY_SMALL + ")")
+                        document.getElementById("searchResults").innerHTML += COUNTRY_LONG;
+                    }
                 }
             })
     })
