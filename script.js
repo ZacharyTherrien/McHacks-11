@@ -51,6 +51,7 @@ function articleSearch()
             //Populate the list
             for (let i = 0; i < articles.length; i++)
             {
+                console.log(articles[i]);
                 if (i > 0 && articles[i]['title'] != articles[i - 1]['title'])
                 {
                     let article = document.createElement("a");
@@ -68,9 +69,10 @@ function articleSearch()
                     let date = document.createElement("div");
                     date.classList.add("dates");
                     let parse = articles[i]['publishedAt'].split("T");
-
-                    //console.log(parse[1])
                     date.innerHTML = parse[0];
+                    let articleImage = document.createElement("img");
+                    articleImage.src = articles[i]['image'];
+                    articleImage.classList.add('articleImage');
                     let section = document.createElement("li");
                     section.classList.add("sections");
                     section.appendChild(date);
@@ -81,6 +83,7 @@ function articleSearch()
                     section.appendChild(article);
                     section.appendChild(breakLine);
                     section.appendChild(description);
+                    section.appendChild(articleImage);
                     allArticles.push(section);
                 }
             }
