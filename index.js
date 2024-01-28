@@ -38,22 +38,27 @@ async function initMap()
                 'latLng' : event.latLng
             }, (results, status) =>
             {
-                if (status == google.maps.GeocoderStatus.OK || results[0]){
+                if (status == google.maps.GeocoderStatus.OK || results[0])
+                {
                     //By default, set it to invalid the first time, and only once.
                     console.log("Invalid country clicked. ");
                     document.getElementById('findMe').disabled = true;
                     let found = false;
                     //Loop through each result from the onClick on the map.
-                    for(let k = 0; k < results.length; k++){
+                    for(let k = 0; k < results.length; k++)
+                    {
                         let address = results[k].address_components;
                         //console.log(address);
                         //Each result provides up to several different types of addresses for a location.
-                        for (let i = 0; i < address.length; i++){
+                        for (let i = 0; i < address.length; i++)
+                        {
                             let component = address[i];
                             //Loop through each component of each different address until country name.
-                            for (let j = 0; j < component.types.length; j++){
+                            for (let j = 0; j < component.types.length; j++)
+                            {
                                 let type = component.types[j];
-                                if (type == "country"){
+                                if (type == "country")
+                                {
                                     change_country(component.long_name, component.short_name);
                                     found = true;
                                     //Now break through each loop since country name found.
@@ -64,7 +69,8 @@ async function initMap()
                                 break;
                         }
                         document.getElementById("searchResults").innerText = "Search results for: "
-                        if(found){
+                        if(found)
+                        {
                             console.log("Broadcasting from " + COUNTRY_LONG + " (" + COUNTRY_SMALL + ")");
                             change_url(COUNTRY_LONG);
                             document.getElementById("searchResults").innerHTML += COUNTRY_LONG;
