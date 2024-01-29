@@ -5,9 +5,9 @@ let marker;
 let geocoder;
 
 document.getElementById("randomizerButton").addEventListener("click", randoArea);
+document.getElementById("title").addEventListener("click", logoClick);
 
-async function initMap()
-{
+async function initMap(){
     const { Map } = await google.maps.importLibrary("maps");
 
     geocoder = new google.maps.Geocoder();
@@ -30,8 +30,7 @@ function mapClick(latLng, geocoder = null){
     }
     else{
         reset();
-        marker = new google.maps.Marker(
-        {
+        marker = new google.maps.Marker({
             position: latLng,
             map: map,
             icon: {
@@ -41,64 +40,29 @@ function mapClick(latLng, geocoder = null){
         })
     }
 
-    geocoder.geocode(
-    {
+    geocoder.geocode({
         'latLng' : latLng
-    }, (results, status) =>
-    {
-        if (status == google.maps.GeocoderStatus.OK || results[0])
-        {
-            //By default, set it to invalid the first time, and only once.
-            //console.log("Invalid country clicked. ");
-            document.getElementById('findMe').disabled = true;
-            let found = false;
-            //Loop through each result from the onClick on the map.
-            for(let k = 0; k < results.length; k++)
-            {
-                let address = results[k].address_components;
-                //console.log(address);
-                //Each result provides up to several different types of addresses for a location.
-                for (let i = 0; i < address.length; i++)
-                {
-                    let component = address[i];
-                    //Loop through each component of each different address until country name.
-                    for (let j = 0; j < component.types.length; j++)
-                    {
-                        let type = component.types[j];
-                        if (type == "country")
-                        {
-                            change_country(component.long_name, component.short_name);
-                            found = true;
-                            //alert();
-                            //Now break through each loop since country name found.
-                            break;
-                        }
-                    }
-                    if(found)
-                        break;
-                }
-                document.getElementById("searchResults").innerText = "Search results for: "
-                if(found){
-                    console.log("Broadcasting from " + COUNTRY_LONG + " (" + COUNTRY_SMALL + ")");
-                    change_url(COUNTRY_LONG);
-                    document.getElementById("searchResults").innerHTML += COUNTRY_LONG;
-                    document.getElementById('findMe').disabled = false;
-                    break;
-                }
-                // else{
-                //     let list = document.getElementById("results");
-                //     let fish = document.createElement("img");
-                //     fish.classList.add('articleImage');
-                //     fish.src = "./icon/aquarium.gif";
-                //     list.appendChild(fish);
-                // }
+    }, (results, status) => {
+        document.getElementById('findMe').disabled = true;
+        document.getElementById("searchResults").innerText = "Search results for: "
+        if (status == google.maps.GeocoderStatus.OK || results[0]){
+            if(results.length > 1){
+                let component = results[results.length - 1]['formatted_address'];
+                change_country(component, "");
+                console.log("Broadcasting from " + COUNTRY_LONG + " (" + COUNTRY_SMALL + ")");
+                change_url(COUNTRY_LONG);
+                document.getElementById("searchResults").innerHTML += COUNTRY_LONG;
+                document.getElementById('findMe').disabled = false;
             }
-            if(!found){
+            else{
                 let fish = document.createElement("img");
                 fish.classList.add('articleImage');
                 fish.src = "./icon/aquarium.gif";
                 list.appendChild(fish);
             }
+        }
+        else{
+            console.error("No results found, possible error from fetching map data.");
         }
     })
 }
@@ -112,4 +76,22 @@ function randoArea(){
     console.log(newLat + " " + newLng);
     newlatLng = {lat: newLat, lng: newLng};
     mapClick(newlatLng, geocoder);
+}
+
+function logoClick(){
+    let hour = new Date().getHours();
+    if(hour == 3){
+        let list = document.getElementById("results");
+        list.innerHTML = "";
+        let potion = document.createElement("img");
+        potion.classList.add("articleImage");
+        potion.src = "./icon/Potion.gif";
+        list.appendChild(potion);
+        alert("...");    
+    }
+    else{
+        alert("\tWelcome to Hello World News!" +
+        "\nFeel free to browse the map for all the news across the world!" +
+        "\nGlobal news is just a click away! Find a country on the map, and press the button for its local news!");
+    }
 }

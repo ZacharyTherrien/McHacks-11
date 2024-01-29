@@ -60,18 +60,17 @@ function articleSearch()
                     article.innerHTML = articles[i]['title'];
                     article.href = articles[i]['url'];
                     article.target = "_blank";
-                    //console.log(articles[i]['url']);
                     let source = document.createElement("span");
                     source.innerHTML = articles[i]['source'];
                     let breakLine = document.createElement("br");
                     let description = document.createElement("div");
                     description.classList.add("descriptions");
                     description.innerHTML = articles[i]['description'];
-                    //Remove the time from the date
+                    //Append the time to the date
                     let date = document.createElement("div");
                     date.classList.add("dates");
                     let parse = articles[i]['publishedAt'].split("T");
-                    date.innerHTML = parse[0];
+                    date.innerHTML = parse[0] + " at: " + parse[1].slice(0, parse[1].length - 1);
                     let articleImage = document.createElement("img");
                     articleImage.src = articles[i]['image'];
                     articleImage.classList.add('articleImage');
