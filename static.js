@@ -15,6 +15,35 @@ export function reset()
     COUNTRY_LONG = "";
     COUNTRY_SMALL = "";
 }
+
 export function change_url(country){
     query = url + country + API_KEY;
+}
+
+export function enableArticleButton(enabled){
+    let findButton = document.getElementById("findMe");
+    if(enabled){
+        findButton.style.pointerEvents = "auto";
+        findButton.style.color = "white";
+        findButton.style.backgroundColor = "#FFA12B";
+    }
+    else{
+       findButton.style.pointerEvents = "none";
+       findButton.style.color = "#FBFBFB";
+       findButton.style.backgroundColor = "#E69229";
+    }
+}
+
+export function enableSwitchingArticles(enabled){
+    let changeButtons = document.getElementsByClassName("arrow");
+    for(let i = 0; i < changeButtons.length; i++){
+        if(enabled){
+            changeButtons[i].style.pointerEvents = "auto";
+            changeButtons[i].style.backgroundColor = "#FAF9F8";
+        }
+        else{
+            changeButtons[i].style.pointerEvents = "none";
+            changeButtons[i].style.backgroundColor = "#DEDEDE";
+        }
+    }
 }

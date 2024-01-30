@@ -1,15 +1,10 @@
-import { COUNTRY_LONG, COUNTRY_SMALL, change_country, url, API_KEY, query } from "./static.js"
+import { COUNTRY_LONG, url, API_KEY, enableArticleButton, enableSwitchingArticles } from "./static.js"
 
 var counter = 0;
 var allArticles = [];
 
-// export const url = "https://gnews.io/api/v4/search?q=";
-// export const API_KEY = "&apikey=87752405435ed2dd3fef1c0267ae5da2";
-
-
 let list = document.getElementById("results");
 document.getElementById("findMe").addEventListener("click", articleSearch);
-
 
 function goToNextArticle()
 {
@@ -33,8 +28,6 @@ function goToPreviousArticle()
 }
 document.getElementById("previousButtonButton").onclick = goToPreviousArticle;
 
-let articles = [];
-
 function articleSearch()
 {
     allArticles = [];
@@ -48,7 +41,7 @@ function articleSearch()
         .then(data =>
         {
             list.innerHTML = "";
-            articles = data.articles;
+            let articles = data.articles;
             //Populate the list
             for (let i = 0; i < articles.length; i++)
             {
@@ -62,7 +55,6 @@ function articleSearch()
                     article.target = "_blank";
                     let source = document.createElement("span");
                     source.innerHTML = articles[i]['source'];
-                    let breakLine = document.createElement("br");
                     let description = document.createElement("div");
                     description.classList.add("descriptions");
                     description.innerHTML = articles[i]['description'];
@@ -77,25 +69,22 @@ function articleSearch()
                     let section = document.createElement("li");
                     section.classList.add("sections");
                     section.appendChild(date);
-                    //let time = document.createElement("div");
-                    //time.classList.add("times");
-                    //time.innerHTML = parse[1].substring(0, parse[1].length - 4);
-                    //section.appendChild(time);
                     section.appendChild(article);
-                    section.appendChild(breakLine);
+                    section.appendChild(document.createElement("br"));
                     section.appendChild(description);
                     section.appendChild(articleImage);
                     allArticles.push(section);
                 }
             }
             list.appendChild(allArticles[0]);
-            let foo = document.getElementById("searchResults");
-            foo.href = "google.com";
+            enableSwitchingArticles(true);
+            // let foo = document.getElementById("searchResults");
+            // foo.href = "google.com";
         })
         .catch(() =>
         {
             console.error("oooppss");
-            alert();
+            alert("Error fetching articles.");
         });
 }
 

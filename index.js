@@ -1,4 +1,4 @@
-import { COUNTRY_LONG, COUNTRY_SMALL, reset, change_country, url, API_KEY, query, change_url } from "./static.js"
+import { COUNTRY_LONG, COUNTRY_SMALL, reset, change_country, change_url, enableArticleButton, enableSwitchingArticles} from "./static.js"
 
 let map;
 let marker;
@@ -44,6 +44,7 @@ function mapClick(latLng, geocoder = null){
         'latLng' : latLng
     }, (results, status) => {
         document.getElementById('findMe').disabled = true;
+        enableSwitchingArticles(false);
         document.getElementById("searchResults").innerText = "Search results for: "
         if (status == google.maps.GeocoderStatus.OK || results[0]){
             if(results.length > 1){
@@ -52,13 +53,14 @@ function mapClick(latLng, geocoder = null){
                 console.log("Broadcasting from " + COUNTRY_LONG + " (" + COUNTRY_SMALL + ")");
                 change_url(COUNTRY_LONG);
                 document.getElementById("searchResults").innerHTML += COUNTRY_LONG;
-                document.getElementById('findMe').disabled = false;
+                enableArticleButton(true);
             }
             else{
                 let fish = document.createElement("img");
                 fish.classList.add('articleImage');
                 fish.src = "./icon/aquarium.gif";
                 list.appendChild(fish);
+                enableArticleButton(false);
             }
         }
         else{
@@ -66,8 +68,6 @@ function mapClick(latLng, geocoder = null){
         }
     })
 }
-
-initMap();
 
 function randoArea(){
     let newlatLng;
@@ -95,3 +95,6 @@ function logoClick(){
         "\nGlobal news is just a click away! Find a country on the map, and press the button for its local news!");
     }
 }
+
+enableSwitchingArticles(false);
+initMap();
