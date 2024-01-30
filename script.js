@@ -84,7 +84,8 @@ function articleSearch()
         .catch(() =>
         {
             console.error("oooppss");
-            alert("Error fetching articles.");
+            alert("\tError fetching articles." +
+            "\nThe API for fetching the articles might made too many requests recently, try again tomorrow.");
         });
 }
 

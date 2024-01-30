@@ -48,8 +48,9 @@ function mapClick(latLng, geocoder = null){
         document.getElementById("searchResults").innerText = "Search results for: "
         if (status == google.maps.GeocoderStatus.OK || results[0]){
             if(results.length > 1){
-                let component = results[results.length - 1]['formatted_address'];
-                change_country(component, "");
+                let component = results[results.length - 1];
+                let foo = component.address_components;
+                change_country(component.address_components[0].long_name, component.address_components[0].short_name);
                 console.log("Broadcasting from " + COUNTRY_LONG + " (" + COUNTRY_SMALL + ")");
                 change_url(COUNTRY_LONG);
                 document.getElementById("searchResults").innerHTML += COUNTRY_LONG;
