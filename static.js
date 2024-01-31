@@ -19,6 +19,7 @@ export function reset()
 
 export function toggleCountryQuery(){
     toggle = !toggle;
+    return toggle;
 }
 
 export function change_url(country_long, country_short){
@@ -36,15 +37,18 @@ export function change_url(country_long, country_short){
 
 export function enableArticleButton(enabled){
     let findButton = document.getElementById("findMe");
+    let container = findButton.parentElement;
     if(enabled){
         findButton.style.pointerEvents = "auto";
         findButton.style.color = "white";
         findButton.style.backgroundColor = "#FFA12B";
+        container.style.cursor = "pointer";
     }
     else{
-       findButton.style.pointerEvents = "none";
-       findButton.style.color = "#FBFBFB";
-       findButton.style.backgroundColor = "#E69229";
+        findButton.style.pointerEvents = "none";
+        findButton.style.color = "#FBFBFB";
+        findButton.style.backgroundColor = "#E69229";
+        container.style.cursor = "default";
     }
 }
 
@@ -54,10 +58,12 @@ export function enableSwitchingArticles(enabled){
         if(enabled){
             changeButtons[i].style.pointerEvents = "auto";
             changeButtons[i].style.backgroundColor = "#FAF9F8";
+            changeButtons[i].parentElement.style.cursor = "pointer";
         }
         else{
             changeButtons[i].style.pointerEvents = "none";
-            changeButtons[i].style.backgroundColor = "#DEDEDE";
+            changeButtons[i].style.backgroundColor = "#EEEEEE";
+            changeButtons[i].parentElement.style.cursor = "default";
         }
     }
 }

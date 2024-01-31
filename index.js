@@ -70,7 +70,7 @@ function mapClick(latLng, geocoder = null){
     })
 }
 
-function randoArea(){
+function randoArea(i = 0){
     let newlatLng;
     let newLat =  ((Math.random() * 180) -90);
     let newLng = ((Math.random() * 360) -180);
@@ -80,7 +80,7 @@ function randoArea(){
 }
 
 function logoClick(){
-    toggleCountryQuery();
+    let toggleNotification = toggleCountryQuery() ? "\nToggle to search by articles published in selected country is on! Prepare to translate!" : "\nThe toggle has been turned off";
     let hour = new Date().getHours();
     if(hour == 3){
         let list = document.getElementById("results");
@@ -95,9 +95,10 @@ function logoClick(){
         alert("\tWelcome to Hello World News!" +
         "\nFeel free to browse the map for all the news across the world!" +
         "\nGlobal news is just a click away! Find a country on the map, and press the button for its local news!" +
-        "\nToggle to search by articles published in selected country is on! Prepare to translate!");
+        toggleNotification);
     }
 }
 
 enableSwitchingArticles(false);
+enableArticleButton(false);
 initMap();

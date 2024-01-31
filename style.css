@@ -250,7 +250,7 @@ ul
 
 .button .arrow:active
 {
-    cursor: none;
+    /* cursor: none; */
     top:10px;
     background-color:#ef7e7e;
     
@@ -262,7 +262,7 @@ ul
   
 .button a:active
 {
-    cursor: none;
+    /* cursor: none; */
     top:10px;
     background-color:#F78900;
     
