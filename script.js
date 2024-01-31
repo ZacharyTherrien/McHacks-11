@@ -1,4 +1,4 @@
-import { COUNTRY_LONG, url, API_KEY, enableArticleButton, enableSwitchingArticles } from "./static.js"
+import { query, enableSwitchingArticles } from "./static.js"
 
 var counter = 0;
 var allArticles = [];
@@ -35,7 +35,6 @@ function articleSearch()
     let loading = document.createElement("p");
     loading.innerHTML = "Loading articles...";
     list.appendChild(loading);
-    let query = url + COUNTRY_LONG + API_KEY;
     fetch(query)
         .then(response => response.json())
         .then(data =>

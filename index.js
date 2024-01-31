@@ -1,4 +1,4 @@
-import { COUNTRY_LONG, COUNTRY_SMALL, reset, change_country, change_url, enableArticleButton, enableSwitchingArticles} from "./static.js"
+import { reset, change_url, enableArticleButton, enableSwitchingArticles, toggleCountryQuery} from "./static.js"
 
 let map;
 let marker;
@@ -49,11 +49,11 @@ function mapClick(latLng, geocoder = null){
         if (status == google.maps.GeocoderStatus.OK || results[0]){
             if(results.length > 1){
                 let component = results[results.length - 1];
-                let foo = component.address_components;
-                change_country(component.address_components[0].long_name, component.address_components[0].short_name);
-                console.log("Broadcasting from " + COUNTRY_LONG + " (" + COUNTRY_SMALL + ")");
-                change_url(COUNTRY_LONG);
-                document.getElementById("searchResults").innerHTML += COUNTRY_LONG;
+                let country_long = component.address_components[0].long_name; 
+                let country_short = component.address_components[0].short_name;
+                console.log("Broadcasting from " + country_long + " (" + country_short + ")");
+                change_url(country_long, country_short);
+                document.getElementById("searchResults").innerHTML += country_long;
                 enableArticleButton(true);
             }
             else{
@@ -80,6 +80,7 @@ function randoArea(){
 }
 
 function logoClick(){
+    toggleCountryQuery();
     let hour = new Date().getHours();
     if(hour == 3){
         let list = document.getElementById("results");
@@ -93,7 +94,8 @@ function logoClick(){
     else{
         alert("\tWelcome to Hello World News!" +
         "\nFeel free to browse the map for all the news across the world!" +
-        "\nGlobal news is just a click away! Find a country on the map, and press the button for its local news!");
+        "\nGlobal news is just a click away! Find a country on the map, and press the button for its local news!" +
+        "\nToggle to search by articles published in selected country is on! Prepare to translate!");
     }
 }
 
