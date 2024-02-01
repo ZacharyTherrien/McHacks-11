@@ -1,7 +1,7 @@
 export let COUNTRY_LONG = "Canada";
 export let COUNTRY_SMALL = "CA";
 export const url = "https://gnews.io/api/v4/search?";
-export const API_KEY = "&apikey=87752405435ed2dd3fef1c0267ae5da2";
+export const API_KEY = "&sortby=publishedAt&apikey=87752405435ed2dd3fef1c0267ae5da2";
 export let query = url + "Canada" + API_KEY;
 let toggle = false;
 
@@ -22,16 +22,20 @@ export function toggleCountryQuery(){
     return toggle;
 }
 
-export function change_url(country_long, country_short){
-    let spaces = country_long.split(" ");
-    let newCountry_Long = spaces[0];
-    let country = "";
+export function change_url(country_long = COUNTRY_LONG, country_short = COUNTRY_SMALL){
+    if(country_long)
+        COUNTRY_LONG = country_long;
+    if(country_short)
+        COUNTRY_SMALL = country_short;
+    let spaceSplit = COUNTRY_LONG.split(" ");
+    let newCountry_Long = spaceSplit[0];
+    let countryAbbrv = "";
     if(toggle)
-        country = `&country=${country_short.toLowerCase()}`;
-    for(let i = 1; i < spaces.length; i++){
-        newCountry_Long += "+" + spaces[i];
+        countryAbbrv = `&country=${COUNTRY_SMALL.toLowerCase()}`;
+    for(let i = 1; i < spaceSplit.length; i++){
+        newCountry_Long += "+" + spaceSplit[i];
     }
-    query = url + `q=${newCountry_Long}` + country + API_KEY;
+    query = url + `q=${newCountry_Long}` + countryAbbrv + API_KEY;
     console.log(query);
 }
 
